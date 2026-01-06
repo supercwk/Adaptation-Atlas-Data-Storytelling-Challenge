@@ -18,6 +18,3 @@ Data storytelling notebooks exploring climate change impacts on water security, 
 
 ## 🛠 Tools Used
 Observable, JavaScript, HTML, Data Visualization
-
-## 👤 Author
-**supercwk** - [Zindi Profile](https://zindi.africa/users/supercwk)
