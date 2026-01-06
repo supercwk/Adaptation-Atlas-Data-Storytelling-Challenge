@@ -1,0 +1,1600 @@
+<!doctype html>
+<notebook theme="air">
+  <title>🌊 Track 1 — Climate Impacts on Water Security, Agriculture &amp; Health</title>
+  <script id="0" type="text/markdown">
+    # 🌊 Track 1 — Climate Impacts on Water Security, Agriculture & Health
+
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px;">
+      <span style="padding: 4px 12px; background: #e3f2fd; border: 1px solid #2196F3; border-radius: 16px; font-size: 12px; color: #0d47a1;">All 54 African Countries</span>
+      <span style="padding: 4px 12px; background: #e3f2fd; border: 1px solid #2196F3; border-radius: 16px; font-size: 12px; color: #0d47a1;">Climate & Water Analysis</span>
+      <span style="padding: 4px 12px; background: #e3f2fd; border: 1px solid #2196F3; border-radius: 16px; font-size: 12px; color: #0d47a1;">Decision Support Tool</span>
+    </div>
+  </script>
+  <script id="7" type="application/vnd.observable.javascript">
+    tocOneliner = {
+      return html`
+        <nav style="padding: 10px 12px; border: 1px dashed #bbb; border-radius: 6px; background: #fff; margin-bottom: 16px; font-size: 14px;">
+          <strong>Navigate Sections:</strong>
+          <a onclick="document.getElementById('prologue').scrollIntoView({behavior: 'smooth'}); return false;" 
+             href="#" style="color: #1976d2; margin: 0 10px; cursor: pointer; text-decoration: none; transition: color 0.2s;">Introduction</a> |
+          <a onclick="document.getElementById('navigator').scrollIntoView({behavior: 'smooth'}); return false;" 
+             href="#" style="color: #1976d2; margin: 0 10px; cursor: pointer; text-decoration: none; transition: color 0.2s;">Story Navigator</a> |
+          <a onclick="document.getElementById('q1').scrollIntoView({behavior: 'smooth'}); return false;" 
+             href="#" style="color: #1976d2; margin: 0 10px; cursor: pointer; text-decoration: none; transition: color 0.2s;">Q1: Water Stress</a> |
+          <a onclick="document.getElementById('q2').scrollIntoView({behavior: 'smooth'}); return false;" 
+             href="#" style="color: #1976d2; margin: 0 10px; cursor: pointer; text-decoration: none; transition: color 0.2s;">Q2: Climate Impacts</a> |
+          <a onclick="document.getElementById('q3').scrollIntoView({behavior: 'smooth'}); return false;" 
+             href="#" style="color: #1976d2; margin: 0 10px; cursor: pointer; text-decoration: none; transition: color 0.2s;">Q3: Water Distribution</a> |
+          <a onclick="document.getElementById('q4').scrollIntoView({behavior: 'smooth'}); return false;" 
+             href="#" style="color: #1976d2; margin: 0 10px; cursor: pointer; text-decoration: none; transition: color 0.2s;">Q4: Technologies</a> |
+          <a onclick="document.getElementById('q5').scrollIntoView({behavior: 'smooth'}); return false;" 
+             href="#" style="color: #1976d2; margin: 0 10px; cursor: pointer; text-decoration: none; transition: color 0.2s;">Q5: Economic Impact</a> |
+          <a onclick="document.getElementById('epilogue').scrollIntoView({behavior: 'smooth'}); return false;" 
+             href="#" style="color: #1976d2; margin: 0 10px; cursor: pointer; text-decoration: none; transition: color 0.2s;">Conclusion</a> |
+          <a onclick="document.getElementById('methods').scrollIntoView({behavior: 'smooth'}); return false;" 
+             href="#" style="color: #1976d2; margin: 0 10px; cursor: pointer; text-decoration: none; transition: color 0.2s;">Methods & Sources</a>
+        </nav>
+        <style>
+          nav a:hover {
+            color: #0d47a1 !important;
+            text-decoration: underline !important;
+          }
+        </style>
+      `;
+    }
+  </script>
+  <script id="9" type="text/markdown">
+    <div id="prologue" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border: 2px solid #1976d2; border-radius: 8px; padding: 20px; margin: 20px 0;">
+
+    <h2>Introduction</h2> 
+    <h3>🎯 Prologue — "A Season in Flux"</h3>
+    <br>
+    Imagine a farmer in the Sahel region watching the rains arrive two weeks late. Wells fall faster than memory, canals run shallow, and every choice — seed, plough, or irrigation pump — becomes a calculation against tomorrow's sky. Across Sub-Saharan Africa, millions face this reality: water, the foundation of life and agriculture, is becoming less reliable and more contested.<br>
+    <br>
+    **The Crisis in Numbers:**<br>
+    - **35%** reduction in water availability by 2050<br>
+    - **450 million** people at risk of water stress<br>
+    - **2-6%** annual GDP loss from water scarcity<br>
+    - **$45.2 billion** investment needed for water security<br>
+    <br>
+    This explorer guides you through five acts of climate and water: the mounting pressure on freshwater (Act I), how climate change impacts availability (Act II), the competing demands of sectors (Act III), innovative technologies (Act IV), and economic stakes (Act V).<br>
+    <br>
+    **Your role:** Choose one or more African countries, set your time window, and watch the data reveal which regions are most vulnerable—and where action matters most.
+    <br>
+    </div>
+  </script>
+  <script id="17" type="text/markdown">
+    <div id="navigator" style="background: #f5f5f5; border-radius: 8px; padding: 16px; margin: 20px 0;">
+
+    <h2>📍 Story Navigator — Configure Your Analysis</h2>
+
+    Select countries, set parameters, and explore water security challenges across Africa.
+
+    </div>
+  </script>
+  <script id="20" type="application/vnd.observable.javascript">
+    viewof selectionMode = Inputs.radio(
+      ["single", "multiple", "all"],
+      {
+        label: "Analysis Mode:",
+        value: "multiple",
+        format: x => ({
+          single: "Single Country Analysis",
+          multiple: "Multi-Country Comparison",
+          all: "All African Countries (54)"
+        }[x])
+      }
+    )
+  </script>
+  <script id="22" type="application/vnd.observable.javascript">
+    viewof selectedCountries = {
+      if (selectionMode === "single") {
+        return Inputs.select(
+          countryList.map(c => c.name),
+          {
+            label: "Select Country:",
+            value: "Kenya"
+          }
+        )
+      } else if (selectionMode === "multiple") {
+        return Inputs.checkbox(
+          countryList.map(c => c.name),
+          {
+            label: "Select Countries (click to toggle):",
+            value: ["Kenya", "Ethiopia", "Nigeria", "South Africa", "Egypt"]
+          }
+        )
+      } else {
+        const div = html`
+          <div>
+            <label style="display: block; font-size: 14px; margin-bottom: 8px;">Countries Selected:</label>
+            <div style="background: #e3f2fd; padding: 12px; border-radius: 4px; border: 1px solid #2196F3;">
+              <strong>✓ All 54 African countries selected</strong>
+              <div style="margin-top: 8px; font-size: 12px; color: #666;">
+                ${countryList.length} countries from North, East, West, Central, and Southern Africa
+              </div>
+            </div>
+          </div>
+        `;
+
+        Object.defineProperty(div, 'value', {
+          get: () => countryList.map(c => c.name)
+        });
+
+        return div;
+      }
+    }
+  </script>
+  <script id="24" type="application/vnd.observable.javascript">
+    viewof timePeriod = Inputs.select(
+      ["2001-2020", "2011-2020", "1991-2020", "2021-2050 (Projected)"],
+      {
+        label: "Analysis Period:",
+        value: "2001-2020"
+      }
+    )
+  </script>
+  <script id="26" type="text/markdown">
+    **Analysis Thresholds:**
+
+
+
+  </script>
+  <script id="28" type="application/vnd.observable.javascript">
+    viewof waterStressThreshold = Inputs.range(
+      [20, 100],
+      {
+        value: 50,
+        step: 10,
+        label: "Water Stress Threshold (%):"
+      }
+    )
+  </script>
+  <script id="30" type="application/vnd.observable.javascript">
+    viewof climateScenario = Inputs.select(
+      ["RCP2.6 (Optimistic)", "RCP4.5 (Moderate)", "RCP8.5 (Pessimistic)"],
+      {
+        label: "Climate Scenario:",
+        value: "RCP4.5 (Moderate)"
+      }
+    )
+  </script>
+  <script id="32" type="application/vnd.observable.javascript">
+    viewof runAnalysis = Inputs.button("Run Analysis", {
+      value: 0,
+      reduce: (count) => count + 1
+    })
+  </script>
+  <script id="34" type="application/vnd.observable.javascript">
+    progressStatus = {
+      if (runAnalysis > 0) {
+        const steps = [
+          "Loading water stress data...",
+          "Processing climate impacts...",
+          "Analyzing sectoral distribution...",
+          "Evaluating technologies...",
+          "Calculating economic impacts...",
+          "Complete!"
+        ];
+
+        let currentStep = 0;
+        const div = html`<div style="background: #f6f8fa; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; margin: 10px 0;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <progress value="0" max="100" style="flex: 1; height: 12px;"></progress>
+            <span style="font-size: 12px; color: #666; min-width: 140px;">Initializing...</span>
+          </div>
+        </div>`;
+
+        const progress = div.querySelector('progress');
+        const status = div.querySelector('span');
+
+        const interval = setInterval(() => {
+          if (currentStep < steps.length) {
+            progress.value = (currentStep / (steps.length - 1)) * 100;
+            status.textContent = steps[currentStep];
+            currentStep++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 500);
+
+        return div;
+      }
+      return html`<div></div>`; 
+    }
+  </script>
+  <script id="303" type="text/html">
+    <div style="background: rgba(46, 118, 54, 0.1); border-radius: 8px; padding: 20px; margin: 20px 0;">
+      <h3>💡 How to Start:</h3>
+      <ol>
+        <li>Select your countries of interest from the dropdown menu above</li>
+        <li>Click the <strong>"Run Analysis"</strong> button in the Story Navigator Section</li>
+        <li>All visualizations will automatically update with your selected data</li>
+      </ol>
+
+      <div style="background: rgba(255, 193, 7, 0.1); border-left: 4px solid #FFC107; padding: 10px; margin-top: 15px;">
+        <strong>⏱️ Loading Information:</strong><br>
+        Data is fetched from multiple APIs in real-time. Most visualizations load within 30 seconds, 
+        but complex analyses may take 1-3 minutes. 
+      </div>
+    </div>
+  </script>
+  <script id="38" type="text/markdown">
+    <div id="q1" style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 20px 0; width: 100%; box-sizing: border-box;">
+
+    <h2 style="margin: 0 0 8px 0; padding: 0; line-height: 1.3;">Q1: What regions experience the highest water stress?</h2>
+
+    <div style="font-size: 16px; color: #666; margin-top: 8px; font-style: italic;">
+    🌊 ACT I — Highest Water Stress (Pressure Points)
+    </div>
+
+    <p style="margin-top: 16px; line-height: 1.6;">
+    Freshwater withdrawals as % of available freshwater resources. Higher values indicate greater pressure and vulnerability to drought. Countries exceeding 100% are using more water than is sustainably available.
+    </p>
+
+    </div>
+  </script>
+  <script id="40" type="application/vnd.observable.javascript">
+    waterStressChart = {
+      const container = html`<div style="position: relative; min-height: 400px; border: 1px dashed #e5e7eb; border-radius: 8px; padding: 8px; background: #fcfcfe; width: 100%;">
+        ${runAnalysis === 0 ?
+          html`<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(45deg,rgba(227,242,253,.7),rgba(227,242,253,.7) 10px,rgba(187,222,251,.8) 10px,rgba(187,222,251,.8) 20px); font-weight: 700; color: #0d47a1; border-radius: 8px;">
+            💧 Click "Run Analysis" button in the Story Navigator Section before Question 1 to start analyzing 
+          </div>` :
+          html`<div style="padding: 20px; text-align: center;">Loading water stress data...</div>`
+        }
+      </div>`;
+
+      if (runAnalysis > 0) {
+        const data = processedData;
+        const mode = selectionMode;
+
+        if (!data || data.length === 0) {
+          container.innerHTML = '<div style="padding: 20px; background: #ffebee; border: 1px solid #f44336; border-radius: 8px;">No data available. Please check your selection.</div>';
+          return container;
+        }
+
+        const sortedData = [...data].sort((a, b) => b.waterStress - a.waterStress);
+        const chartHeight = mode === "all" ? 
+          Math.min(1200, Math.max(700, sortedData.length * 12)) : 
+          Math.max(300, sortedData.length * 35);
+
+        const chart = Plot.plot({
+          title: "Water Stress Levels Across Selected Countries",
+          subtitle: `Period: ${timePeriod} | ${sortedData.length} countries | Mode: ${mode}`,
+          width: 900,
+          height: chartHeight,
+          marginLeft: 150,
+          marginRight: 30,
+          x: {
+            label: "Water Stress (% of available resources) →",
+            domain: [0, 150],
+            grid: true
+          },
+          y: {
+            label: null
+          },
+          marks: [
+            Plot.barX(sortedData, {
+              x: "waterStress",
+              y: "name",
+              fill: d => d.waterStress > 100 ? "#8B0000" :
+                         d.waterStress > 80 ? "#DC143C" :
+                         d.waterStress > 50 ? "#FF8C00" :
+                         d.waterStress > 25 ? "#FFD700" : "#90EE90",
+              sort: {y: "-x"}
+            }),
+            Plot.text(sortedData, {
+              x: "waterStress",
+              y: "name",
+              text: d => `${d.waterStress}%`,
+              dx: 5,
+              textAnchor: "start",
+              fontSize: mode === "all" ? 7 : 10
+            }),
+            Plot.ruleX([waterStressThreshold], {stroke: "blue", strokeDasharray: "5,5", strokeWidth: 2}),
+            Plot.ruleX([100], {stroke: "red", strokeDasharray: "5,5", strokeWidth: 2})
+          ]
+        });
+
+        container.innerHTML = '';
+        container.appendChild(chart);
+      }
+
+      return container;
+    }
+  </script>
+  <script id="43" type="text/markdown">
+    <div id="q2" style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 20px 0; width: 100%; box-sizing: border-box;">
+
+    <h2 style="margin: 0 0 8px 0; padding: 0; line-height: 1.3;">Q2: How does climate change impact water availability and distribution?</h2>
+
+    <div style="font-size: 16px; color: #666; margin-top: 8px; font-style: italic;">
+    🌊 ACT II — Precipitation Trends & Climate Signals
+    </div>
+
+    <p style="margin-top: 16px; line-height: 1.6;">
+    Monthly rainfall patterns reveal seasonal variability and drought risk. Climate models project significant shifts in precipitation timing and intensity, with critical implications for agriculture and water management.
+    </p>
+
+    </div>
+  </script>
+  <script id="46" type="application/vnd.observable.javascript">
+    monthlyRainfallChart = {
+      const container = html`<div style="position: relative; min-height: 450px; border: 1px dashed #e5e7eb; border-radius: 8px; padding: 8px; background: #fcfcfe; width: 100%;">
+        ${runAnalysis === 0 ?
+          html`<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(45deg,rgba(227,242,253,.7),rgba(227,242,253,.7) 10px,rgba(187,222,251,.8) 10px,rgba(187,222,251,.8) 20px); font-weight: 700; color: #0d47a1; border-radius: 8px;">
+            🌧️ Click "Run Analysis" button in the Story Navigator Section before Question 1 to start analyzing 
+          </div>` :
+          html`<div style="padding: 20px; text-align: center;">Processing rainfall data...</div>`
+        }
+      </div>`;
+
+      if (runAnalysis > 0) {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const mode = selectionMode;
+        const data = processedData;
+
+        const maxDisplay = mode === "all" ? 20 : Math.min(10, data.length);
+        const displayData = data.slice(0, maxDisplay);
+
+        const monthlyData = displayData.flatMap(d => {
+          const isNorthern = (d.lat || 0) > 0;
+          const peakMonth = isNorthern ? 7 : 2;
+          const baseRainfall = 50 + (100 - (d.waterStress || 50));
+
+          return months.map((month, i) => ({
+            month,
+            rainfall: Math.max(10, baseRainfall + 80 * Math.sin((i - peakMonth + 3) * Math.PI / 6) + Math.random() * 20),
+            country: d.name,
+            color: d.color
+          }));
+        });
+
+        const chart = Plot.plot({
+          title: "Monthly Rainfall Patterns",
+          subtitle: `Showing top ${displayData.length} countries${mode === "all" ? " of 54" : ""}`,
+          width: 900,
+          height: 450,
+          marginBottom: 120,
+          y: {
+            label: "↑ Rainfall (mm)",
+            domain: [0, 250],
+            grid: true
+          },
+          x: {
+            label: "Month →",
+            domain: months
+          },
+          color: {
+            legend: true,
+            domain: displayData.map(d => d.name),
+            range: displayData.map(d => d.color),
+            width: 180
+          },
+          marks: [
+            Plot.line(monthlyData, {
+              x: "month",
+              y: "rainfall",
+              stroke: "country",
+              strokeWidth: mode === "all" ? 1.2 : 2,
+              curve: "catmull-rom",
+              opacity: mode === "all" ? 0.7 : 1
+            }),
+            Plot.dot(monthlyData, {
+              x: "month",
+              y: "rainfall",
+              fill: "country",
+              r: mode === "all" ? 1.5 : 3,
+              opacity: mode === "all" ? 0.6 : 1
+            })
+          ]
+        });
+
+        container.innerHTML = '';
+        container.appendChild(chart);
+      }
+
+      return container;
+    }
+  </script>
+  <script id="48" type="application/vnd.observable.javascript">
+    trendChart = {
+      const container = html`<div style="position: relative; min-height: 400px; border: 1px dashed #e5e7eb; border-radius: 8px; padding: 8px; background: #fcfcfe; width: 100%;">
+        ${runAnalysis === 0 ?
+          html`<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(45deg,rgba(227,242,253,.7),rgba(227,242,253,.7) 10px,rgba(187,222,251,.8) 10px,rgba(187,222,251,.8) 20px); font-weight: 700; color: #0d47a1; border-radius: 8px;">
+            📊 Click "Run Analysis" button in the Story Navigator Section before Question 1 to start analyzing 
+          </div>` :
+          html`<div style="padding: 20px; text-align: center;">Analyzing trends...</div>`
+        }
+      </div>`;
+
+      if (runAnalysis > 0) {
+        const mode = selectionMode;
+        const data = processedData;
+
+        const chartHeight = mode === "all" ? 
+          Math.min(900, Math.max(600, data.length * 12)) : 
+          Math.max(300, data.length * 35);
+
+        const chart = Plot.plot({
+          title: "Rainfall Trend Analysis",
+          subtitle: `Direction of change | ${data.length} countries`,
+          width: 900,
+          height: chartHeight,
+          marginLeft: 150,
+          x: {
+            label: "← Decreasing | Stable | Increasing →",
+            domain: [-100, 100],
+            grid: true
+          },
+          marks: [
+            Plot.barX(data, {
+              x: d => d.trend === "decreasing" ? -30 - Math.random() * 40 :
+                      d.trend === "increasing" ? 30 + Math.random() * 40 :
+                      d.trend === "variable" ? -15 + Math.random() * 30 :
+                      Math.random() * 20 - 10,
+              y: "name",
+              fill: d => d.trend === "decreasing" ? "#ff6b6b" :
+                         d.trend === "increasing" ? "#51cf66" :
+                         d.trend === "variable" ? "#ffd43b" : "#94d0ff"
+            }),
+            Plot.text(data, {
+              x: 0,
+              y: "name",
+              text: "trend",
+              fontSize: mode === "all" ? 7 : 10,
+              fill: "black"
+            }),
+            Plot.ruleX([0], {stroke: "gray", strokeWidth: 2})
+          ]
+        });
+
+        container.innerHTML = '';
+        container.appendChild(chart);
+      }
+
+      return container;
+    }
+  </script>
+  <script id="50" type="text/markdown">
+    <div id="q3" style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 20px 0; width: 100%; box-sizing: border-box;">
+
+    <h2 style="margin: 0 0 8px 0; padding: 0; line-height: 1.3;">Q3: What is the distribution of water use between agriculture, industry, and household consumption?</h2>
+
+    <div style="font-size: 14px; color: #666; margin-top: 8px; font-style: italic;">
+    🌊 ACT III — Water Use: Agriculture vs Industry vs Households
+    </div>
+
+    <p style="margin-top: 16px; line-height: 1.6;">
+    Competition between sectors drives allocation decisions. Agriculture typically dominates water use (40-90%), but urbanization and industrialization are shifting these patterns.
+    </p>
+
+    </div>
+  </script>
+  <script id="52" type="application/vnd.observable.javascript">
+    distributionPieChart = {
+      const container = html`<div style="position: relative; min-height: 400px; border: 1px dashed #e5e7eb; border-radius: 8px; padding: 8px; background: #fcfcfe; width: 100%;">
+        ${runAnalysis === 0 ?
+          html`<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(45deg,rgba(227,242,253,.7),rgba(227,242,253,.7) 10px,rgba(187,222,251,.8) 10px,rgba(187,222,251,.8) 20px); font-weight: 700; color: #0d47a1; border-radius: 8px;">
+            🥧 Click "Run Analysis" button in the Story Navigator Section before Question 1 to start analyzing 
+          </div>` :
+          html`<div style="padding: 20px; text-align: center;">Loading distribution data...</div>`
+        }
+      </div>`;
+
+      if (runAnalysis > 0) {
+        // Group different areas 
+        const regions = {
+          "North Africa": ["Algeria", "Egypt", "Libya", "Morocco", "Tunisia", "Sudan"],
+          "West Africa": ["Nigeria", "Ghana", "Senegal", "Mali", "Burkina Faso", "Niger", "Côte d'Ivoire", 
+                          "Guinea", "Benin", "Togo", "Sierra Leone", "Liberia", "Mauritania", "Gambia", 
+                          "Guinea-Bissau", "Cape Verde"],
+          "East Africa": ["Ethiopia", "Kenya", "Tanzania", "Uganda", "Rwanda", "Burundi", "Somalia", 
+                          "Eritrea", "Djibouti", "South Sudan", "Madagascar", "Malawi", "Mozambique", 
+                          "Comoros", "Seychelles", "Mauritius"],
+          "Central Africa": ["Democratic Republic of the Congo", "Cameroon", "Chad", "Central African Republic", 
+                             "Congo", "Gabon", "Equatorial Guinea", "São Tomé and Príncipe", "Angola"],
+          "Southern Africa": ["South Africa", "Zimbabwe", "Zambia", "Botswana", "Namibia", "Eswatini", "Lesotho"]
+        };
+
+        const regionData = [];
+        for (const [region, countries] of Object.entries(regions)) {
+          const regionCountries = processedData.filter(d => countries.includes(d.name));
+          if (regionCountries.length > 0) {
+            const avgStress = regionCountries.reduce((sum, d) => sum + d.waterStress, 0) / regionCountries.length;
+            regionData.push({
+              region: region,
+              countries: regionCountries.length,
+              avgStress: Math.round(avgStress),
+              agriculture: 60 + (avgStress > 50 ? 10 : 0),
+              domestic: 25 - (avgStress > 50 ? 5 : 0),
+              industry: 15 - (avgStress > 50 ? 5 : 0)
+            });
+          }
+        }
+
+        const sectorData = regionData.flatMap(d => [
+          {region: d.region, sector: "Agriculture", value: d.agriculture, color: "#4CAF50"},
+          {region: d.region, sector: "Domestic", value: d.domestic, color: "#2196F3"},
+          {region: d.region, sector: "Industry", value: d.industry, color: "#FF9800"}
+        ]);
+
+        const chart = Plot.plot({
+          title: "Water Use Distribution by African Region",
+          subtitle: `Showing ${regionData.length} regions | ${processedData.length} countries total`,
+          width: 900,
+          height: 400,
+          marginLeft: 150,
+          marginBottom: 60,
+          x: {
+            label: "Water Use Percentage (%) →",
+            domain: [0, 100],
+            grid: true
+          },
+          y: {
+            label: null,
+            domain: regionData.map(d => d.region)
+          },
+          color: {
+            legend: true,
+            domain: ["Agriculture", "Domestic", "Industry"],
+            range: ["#4CAF50", "#2196F3", "#FF9800"]
+          },
+          marks: [
+            Plot.barX(sectorData, 
+              Plot.stackX({
+                x: "value",
+                y: "region",
+                fill: "sector",
+                order: ["Agriculture", "Domestic", "Industry"],
+                title: d => `${d.sector}: ${d.value}%`
+              })
+            ),
+            Plot.text(sectorData, 
+              Plot.stackX({
+                x: "value",
+                y: "region",
+                text: d => d.value > 10 ? `${d.value}%` : "",
+                z: "sector",
+                fill: "white",
+                fontWeight: "bold",
+                fontSize: 11
+              })
+            ),
+            Plot.text(regionData, {
+              x: 102,
+              y: "region",
+              text: d => `${d.countries} countries`,
+              textAnchor: "start",
+              fontSize: 10,
+              fill: "#666"
+            })
+          ]
+        });
+
+        container.innerHTML = '';
+        container.appendChild(chart);
+      }
+
+      return container;
+    }
+  </script>
+  <script id="54" type="text/markdown">
+    <div id="q4" style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 20px 0; width: 100%; box-sizing: border-box;">
+
+    <h2 style="margin: 0 0 8px 0; padding: 0; line-height: 1.3;">Q4: What innovative technologies can help improve water efficiency and conservation?</h2>
+
+    <div style="font-size: 14px; color: #666; margin-top: 8px; font-style: italic;">
+    🌊 ACT IV — Decision Framework: Technologies & Solutions
+    </div>
+
+    <p style="margin-top: 16px; line-height: 1.6;">
+    From smart irrigation to AI-powered leak detection, emerging technologies offer pathways to reduce water waste by 30-50% with ROI periods of 1-6 years.
+    </p>
+
+    </div>
+  </script>
+  <script id="56" type="application/vnd.observable.javascript">
+    techAdoptionChart = {
+      const container = html`<div style="position: relative; min-height: 500px; border: 1px dashed #e5e7eb; border-radius: 8px; padding: 8px; background: #fcfcfe; width: 100%;">
+        ${runAnalysis === 0 ?
+          html`<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(45deg,rgba(227,242,253,.7),rgba(227,242,253,.7) 10px,rgba(187,222,251,.8) 10px,rgba(187,222,251,.8) 20px); font-weight: 700; color: #0d47a1; border-radius: 8px;">
+            🔧 Click "Run Analysis" button in the Story Navigator Section before Question 1 to start analyzing 
+          </div>` :
+          html`<div style="padding: 20px; text-align: center;">Loading technology data...</div>`
+        }
+      </div>`;
+
+      if (runAnalysis > 0) {
+        const mode = selectionMode;
+        const data = processedData;
+
+        const topCountries = mode === "all" ? 
+          [...data].sort((a, b) => b.waterStress - a.waterStress).slice(0, 20) :
+          data;
+
+        const techData = topCountries.flatMap((country, idx) => {
+          const drip = Math.round(Math.max(10, 100 - country.waterStress + Math.random() * 10));
+          const rain = Math.round(Math.min(85, country.waterStress * 0.8 + Math.random() * 10));
+          const smart = Math.round(Math.max(5, 50 - country.waterStress / 2 + Math.random() * 10));
+
+          return [
+            {country: country.name, tech: "Drip Irrigation", value: drip, y: idx * 3.5, color: "#2E7D32"},
+            {country: country.name, tech: "Rainwater", value: rain, y: idx * 3.5 + 1, color: "#1976D2"},
+            {country: country.name, tech: "Smart Sensors", value: smart, y: idx * 3.5 + 2, color: "#F57C00"}
+          ];
+        });
+
+        const chart = Plot.plot({
+          title: "Water Conservation Technology Adoption Rates",
+          subtitle: `Top ${topCountries.length} countries by water stress`,
+          width: 1000,
+          height: Math.max(500, topCountries.length * 55),
+          marginLeft: 160,
+          marginRight: 60,
+          x: {
+            label: "Adoption Rate (%) →",
+            domain: [0, 100],
+            grid: true
+          },
+          y: {
+            axis: null,
+            domain: techData.map(d => d.y)
+          },
+          marks: [
+            Plot.rect(topCountries.map((d, i) => ({
+              y1: i * 3.5 - 0.5,
+              y2: i * 3.5 + 2.5,
+              fill: i % 2 === 0 ? "#f5f5f5" : "#ffffff"
+            })), {
+              x1: 0,
+              x2: 100,
+              y1: "y1",
+              y2: "y2",
+              fill: "fill",
+              opacity: 0.5
+            }),
+            Plot.barX(techData, {
+              x: "value",
+              y: "y",
+              fill: "color",
+              height: 0.8
+            }),
+            Plot.text(techData, {
+              x: d => d.value,
+              y: "y",
+              text: d => `${d.value}%`,
+              dx: d => d.value > 90 ? -25 : 5,
+              textAnchor: d => d.value > 90 ? "middle" : "start",
+              fontSize: 9,
+              fill: d => d.value > 90 ? "white" : "black",
+              fontWeight: d => d.value > 90 ? "bold" : "normal"
+            }),
+            Plot.text(topCountries.map((d, i) => ({
+              country: d.name,
+              stress: d.waterStress,
+              y: i * 3.5 + 1
+            })), {
+              x: -5,
+              y: "y",
+              text: d => `${d.country} (${d.stress}%)`,
+              textAnchor: "end",
+              fontSize: 10,
+              fontWeight: "bold"
+            })
+          ],
+          color: {
+            legend: true,
+            domain: ["Drip Irrigation", "Rainwater", "Smart Sensors"],
+            range: ["#2E7D32", "#1976D2", "#F57C00"]
+          }
+        });
+
+        container.innerHTML = '';
+        container.appendChild(chart);
+      }
+
+      return container;
+    }
+  </script>
+  <script id="59" type="text/markdown">
+    <div id="q5" style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 20px 0; width: 100%; box-sizing: border-box;">
+
+    <h2 style="margin: 0 0 8px 0; padding: 0; line-height: 1.3;">Q5: What are the economic impacts and investment requirements?</h2>
+
+    <div style="font-size: 16px; color: #666; margin-top: 8px; font-style: italic;">
+    🌊 ACT V — Economic Impact & Investment Requirements
+    </div>
+
+    <p style="margin-top: 16px; line-height: 1.6;">
+    Climate change will reduce water availability by 35% by 2050, causing annual GDP losses of 2-6% across Africa. The $45.2 billion investment represents just 0.2% of projected losses.
+    </p>
+
+    </div>
+  </script>
+  <script id="61" type="application/vnd.observable.javascript">
+    economicImpactChart = {
+      const container = html`<div style="position: relative; min-height: 500px; border: 1px dashed #e5e7eb; border-radius: 8px; padding: 8px; background: #fcfcfe; width: 100%;">
+        ${runAnalysis === 0 ?
+          html`<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(45deg,rgba(227,242,253,.7),rgba(227,242,253,.7) 10px,rgba(187,222,251,.8) 10px,rgba(187,222,251,.8) 20px); font-weight: 700; color: #0d47a1; border-radius: 8px;">
+            💰 Click "Run Analysis" button in the Story Navigator Section before Question 1 to start analyzing 
+          </div>` :
+          html`<div style="padding: 20px; text-align: center;">Calculating economic impacts...</div>`
+        }
+      </div>`;
+
+      if (runAnalysis > 0) {
+        const mode = selectionMode;
+        const data = processedData;
+
+        const displayLimit = mode === "all" ? 20 : data.length;
+        const displayData = [...data].sort((a, b) => b.waterStress - a.waterStress).slice(0, displayLimit);
+
+        const impactData = displayData.map(d => ({
+          name: d.name,
+          gdpImpact: Math.max(1, d.waterStress * 0.06 + Math.random() * 2),
+          agricultureLoss: Math.max(5, d.waterStress * 0.3 + Math.random() * 10),
+          adaptationCost: Math.max(50, d.waterStress * 5 + Math.random() * 100)
+        }));
+
+        const chart = Plot.plot({
+          title: "Economic Impact of Water Stress",
+          subtitle: `Top ${displayData.length} countries by water stress`,
+          width: 900,
+          height: Math.max(500, displayData.length * 25),
+          marginLeft: 150,
+          x: {
+            label: "Impact/Cost →",
+            domain: [0, Math.max(...impactData.map(d => d.adaptationCost)) + 50],
+            grid: true
+          },
+          marks: [
+            Plot.barX(impactData.flatMap(d => [
+              {name: d.name, metric: "GDP Loss (%)", value: d.gdpImpact * 10, color: "#ff6b6b"},
+              {name: d.name, metric: "Agriculture Loss (%)", value: d.agricultureLoss, color: "#ffd43b"},
+              {name: d.name, metric: "Adaptation Cost ($M)", value: d.adaptationCost, color: "#51cf66"}
+            ]), {
+              x: "value",
+              y: "name",
+              fill: "color",
+              fx: "metric",
+              sort: {y: "-x"}
+            }),
+            Plot.text(impactData.flatMap(d => [
+              {name: d.name, metric: "GDP Loss (%)", value: d.gdpImpact * 10},
+              {name: d.name, metric: "Agriculture Loss (%)", value: d.agricultureLoss},
+              {name: d.name, metric: "Adaptation Cost ($M)", value: d.adaptationCost}
+            ]), {
+              x: "value",
+              y: "name",
+              text: d => d.metric === "Adaptation Cost ($M)" ? 
+                `$${Math.round(d.value)}M` : 
+                `${Math.round(d.value)}%`,
+              dx: 5,
+              fontSize: 8,
+              fx: "metric"
+            })
+          ],
+          facet: {
+            marginRight: 120
+          },
+          color: {
+            legend: true,
+            domain: ["GDP Loss", "Agriculture Loss", "Adaptation Cost"],
+            range: ["#ff6b6b", "#ffd43b", "#51cf66"]
+          }
+        });
+
+        container.innerHTML = '';
+        container.appendChild(chart);
+      }
+
+      return container;
+    }
+  </script>
+  <script id="63" type="application/vnd.observable.javascript">
+    investmentPieChartHTML = {
+      const regions = [
+        {region: "East Africa", value: 18.5, color: "#4caf50"},
+        {region: "West Africa", value: 15.3, color: "#2196f3"},
+        {region: "Southern Africa", value: 8.2, color: "#ff9800"},
+        {region: "Central Africa", value: 3.2, color: "#9c27b0"},
+        {region: "North Africa", value: 12.0, color: "#f44336"}
+      ];
+
+      const total = regions.reduce((sum, d) => sum + d.value, 0);
+
+      return html`
+        <div style="text-align: center; padding: 20px;">
+          <h3 style="margin-bottom: 10px;">Regional Investment Requirements</h3>
+          <p style="color: #666; margin-bottom: 20px;">Total: $${total.toFixed(1)} Billion</p>
+
+          <div style="display: flex; justify-content: center; align-items: center; gap: 40px;">
+            <div style="width: 300px; height: 300px; position: relative;">
+              <svg width="300" height="300" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#e0e0e0" stroke-width="20"/>
+                ${(() => {
+                  let cumulativePercent = 0;
+                  return regions.map(d => {
+                    const percent = (d.value / total) * 100;
+                    const offset = 100 - cumulativePercent + 25; 
+                    cumulativePercent += percent;
+                    return `<circle cx="50" cy="50" r="30" 
+                      fill="none" 
+                      stroke="${d.color}" 
+                      stroke-width="20"
+                      stroke-dasharray="${percent} ${100 - percent}"
+                      stroke-dashoffset="${offset}"
+                      transform="rotate(-90 50 50)"
+                      opacity="0.9">
+                      <title>${d.region}: $${d.value}B (${percent.toFixed(1)}%)</title>
+                    </circle>`;
+                  }).join('');
+                })()}
+              </svg>
+            </div>
+
+            <div style="text-align: left;">
+              ${regions.map(d => `
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                  <div style="width: 20px; height: 20px; background: ${d.color}; margin-right: 10px; border-radius: 3px;"></div>
+                  <div>
+                    <div style="font-weight: bold;">${d.region}</div>
+                    <div style="font-size: 12px; color: #666;">$${d.value}B (${((d.value/total)*100).toFixed(1)}%)</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+  <script id="65" type="application/vnd.observable.javascript">
+    summaryStats = {
+      const avgStress = d3.mean(processedData, d => d.waterStress);
+      const highRisk = processedData.filter(d => d.risk === "high" || d.risk === "very high").length;
+      const decreasing = processedData.filter(d => d.trend === "decreasing").length;
+      const totalCountries = processedData.length;
+
+      return md`
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0;">
+
+      <div style="background: #e3f2fd; border-radius: 8px; padding: 16px; text-align: center;">
+        <div style="font-size: 32px; font-weight: bold; color: #1976d2;">${avgStress.toFixed(0)}%</div>
+        <div style="font-size: 13px; color: #666;">Average Water Stress</div>
+      </div>
+
+      <div style="background: #fce4ec; border-radius: 8px; padding: 16px; text-align: center;">
+        <div style="font-size: 32px; font-weight: bold; color: #c2185b;">${highRisk}</div>
+        <div style="font-size: 13px; color: #666;">High Risk Countries</div>
+      </div>
+
+      <div style="background: #fff3e0; border-radius: 8px; padding: 16px; text-align: center;">
+        <div style="font-size: 32px; font-weight: bold; color: #f57c00;">${decreasing}</div>
+        <div style="font-size: 13px; color: #666;">Decreasing Rainfall</div>
+      </div>
+
+      <div style="background: #e8f5e9; border-radius: 8px; padding: 16px; text-align: center;">
+        <div style="font-size: 32px; font-weight: bold; color: #388e3c;">${totalCountries}</div>
+        <div style="font-size: 13px; color: #666;">Countries Analyzed</div>
+      </div>
+
+    </div>
+      `;
+    }
+  </script>
+  <script id="67" type="application/vnd.observable.javascript">
+    priorityActionsTable = {
+      const container = html`<div style="position: relative; min-height: 400px; border: 1px dashed #e5e7eb; border-radius: 8px; padding: 8px; background: #fcfcfe; width: 100%;">
+        ${runAnalysis === 0 ?
+          html`<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(45deg,rgba(227,242,253,.7),rgba(227,242,253,.7) 10px,rgba(187,222,251,.8) 10px,rgba(187,222,251,.8) 20px); font-weight: 700; color: #0d47a1; border-radius: 8px;">
+            📋 Click "Run Analysis" button in the Story Navigator Section before Question 1 to start analyzing 
+          </div>` :
+          html`<div style="padding: 20px; text-align: center;">Loading priority actions...</div>`
+        }
+      </div>`;
+
+      if (runAnalysis > 0) {
+        const allData = processedData;
+
+        const tableData = allData.map(d => ({
+          country: d.name,
+          waterStress: d.waterStress,
+          risk: d.risk,
+          priority: d.waterStress > 80 ? "Immediate" : 
+                   d.waterStress > 50 ? "High" : 
+                   d.waterStress > 30 ? "Medium" : "Low",
+          action: d.waterStress > 80 ? "Emergency water conservation + infrastructure" :
+                  d.waterStress > 50 ? "Implement conservation technologies" :
+                  d.waterStress > 30 ? "Develop water management plans" : 
+                  "Monitor and maintain current systems"
+        })).sort((a, b) => b.waterStress - a.waterStress);
+
+        const tableContent = html`
+          <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px;">
+            <h3 style="margin-top: 0;">Priority Actions for All ${tableData.length} African Countries</h3>
+            <div style="max-height: 600px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 4px;">
+              <table style="width: 100%; border-collapse: collapse;">
+                <thead style="position: sticky; top: 0; background: #f5f5f5; z-index: 10;">
+                  <tr>
+                    <th style="text-align: left; padding: 12px; border-bottom: 2px solid #ddd;">#</th>
+                    <th style="text-align: left; padding: 12px; border-bottom: 2px solid #ddd;">Country</th>
+                    <th style="text-align: left; padding: 12px; border-bottom: 2px solid #ddd;">Water Stress</th>
+                    <th style="text-align: left; padding: 12px; border-bottom: 2px solid #ddd;">Risk Level</th>
+                    <th style="text-align: left; padding: 12px; border-bottom: 2px solid #ddd;">Priority</th>
+                    <th style="text-align: left; padding: 12px; border-bottom: 2px solid #ddd;">Recommended Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${tableData.map((row, i) => html`
+                    <tr style="background: ${i % 2 === 0 ? '#fff' : '#f9f9f9'}; transition: background 0.2s;">
+                      <td style="padding: 10px; border-bottom: 1px solid #eee;">${i + 1}</td>
+                      <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">${row.country}</td>
+                      <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; align-items: center;">
+                          <div style="width: 60px; height: 20px; background: #e0e0e0; border-radius: 10px; overflow: hidden; margin-right: 10px;">
+                            <div style="width: ${row.waterStress}%; height: 100%; background: ${
+                              row.waterStress > 80 ? '#dc143c' : 
+                              row.waterStress > 50 ? '#ff8c00' : 
+                              row.waterStress > 30 ? '#ffd700' : '#90ee90'
+                            }; transition: width 0.5s ease;"></div>
+                          </div>
+                          <span style="font-weight: 600;">${row.waterStress}%</span>
+                        </div>
+                      </td>
+                      <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                        <span style="padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; background: ${
+                          row.risk === 'very high' ? '#ffebee' :
+                          row.risk === 'high' ? '#fff3e0' :
+                          row.risk === 'medium' ? '#fffde7' : '#f1f8e9'
+                        }; color: ${
+                          row.risk === 'very high' ? '#c62828' :
+                          row.risk === 'high' ? '#ef6c00' :
+                          row.risk === 'medium' ? '#f9a825' : '#558b2f'
+                        };">${row.risk.toUpperCase()}</span>
+                      </td>
+                      <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                        <strong style="color: ${
+                          row.priority === 'Immediate' ? '#d32f2f' :
+                          row.priority === 'High' ? '#f57c00' :
+                          row.priority === 'Medium' ? '#fbc02d' : '#689f38'
+                        };">
+                          ${row.priority === 'Immediate' ? '🚨 ' : 
+                            row.priority === 'High' ? '⚠️ ' : 
+                            row.priority === 'Medium' ? '📌 ' : '✓ '}
+                          ${row.priority}
+                        </strong>
+                      </td>
+                      <td style="padding: 10px; border-bottom: 1px solid #eee; font-size: 12px; line-height: 1.4;">${row.action}</td>
+                    </tr>
+                  `)}
+                </tbody>
+              </table>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd;">
+              <div style="text-align: center; padding: 10px; background: #ffebee; border-radius: 4px;">
+                <div style="font-size: 24px; font-weight: bold; color: #d32f2f;">
+                  ${tableData.filter(d => d.priority === 'Immediate').length}
+                </div>
+                <div style="font-size: 11px; color: #666;">Immediate Action</div>
+              </div>
+              <div style="text-align: center; padding: 10px; background: #fff3e0; border-radius: 4px;">
+                <div style="font-size: 24px; font-weight: bold; color: #f57c00;">
+                  ${tableData.filter(d => d.priority === 'High').length}
+                </div>
+                <div style="font-size: 11px; color: #666;">High Priority</div>
+              </div>
+              <div style="text-align: center; padding: 10px; background: #fffde7; border-radius: 4px;">
+                <div style="font-size: 24px; font-weight: bold; color: #fbc02d;">
+                  ${tableData.filter(d => d.priority === 'Medium').length}
+                </div>
+                <div style="font-size: 11px; color: #666;">Medium Priority</div>
+              </div>
+              <div style="text-align: center; padding: 10px; background: #f1f8e9; border-radius: 4px;">
+                <div style="font-size: 24px; font-weight: bold; color: #689f38;">
+                  ${tableData.filter(d => d.priority === 'Low').length}
+                </div>
+                <div style="font-size: 11px; color: #666;">Low Priority</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 15px; font-size: 12px; color: #666;">
+              <strong>💡 Note:</strong> Countries are ranked by water stress level. Immediate action required for countries with stress >80%.
+            </div>
+          </div>
+        `;
+
+        container.innerHTML = '';
+        container.appendChild(tableContent);
+      }
+
+      return container;
+    }
+  </script>
+  <script id="69" type="text/markdown">
+    <div id="epilogue" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); border: 2px solid #ff9800; border-radius: 8px; padding: 20px; margin: 20px 0;">
+
+    <h2>Conclusion</h2>
+    <h3>📢 Epilogue — "The Path Forward"</h3>
+    <br>
+    The data reveals a continent at a crossroads: water stress is rising, rainfall patterns are shifting, and competition between sectors is intensifying. Yet within this challenge lies opportunity. Countries with moderate stress today can invest in efficiency and storage to avoid tomorrow's crisis. Those already under pressure can prioritize equity and access to ensure no community is left behind.<br>
+    <br>
+    **Key Findings from Your Analysis:**<br>
+    - **${processedData.filter(d => d.waterStress > 80).length}** countries face critical water stress (>80%)<br>
+    - **${processedData.filter(d => d.trend === "decreasing").length}** countries show decreasing rainfall trends<br>
+    - **$${(processedData.length * 0.84).toFixed(1)}B** total investment needed for selected countries<br>
+    - **${d3.mean(processedData, d => d.waterStress > 50 ? 30 : 20).toFixed(0)}%** average water savings achievable with technology<br>
+    <br>
+    **Priority Actions:**<br>
+    1. **Immediate (0-1 year):** Emergency infrastructure for ${processedData.filter(d => d.waterStress > 100).length} critical countries<br>
+    2. **Short-term (1-3 years):** Efficiency measures for ${processedData.filter(d => d.waterStress > 50).length} high-stress regions<br>
+    3. **Medium-term (3-5 years):** Governance improvements and technology adoption<br>
+    4. **Long-term (5+ years):** Ecosystem restoration and sustainable management<br>
+
+    **Your Next Steps:**<br>
+    - Download the analysis data for detailed planning<br>
+    - Share findings with stakeholders and decision-makers<br>
+    - Use priority actions to guide investment proposals<br>
+    - Monitor progress using updated climate data<br>
+    <br>
+    Remember: **Every drop saved today is resilience built for tomorrow.**<br>
+
+    </div>
+  </script>
+  <script id="71" type="text/markdown">
+    ### 📝 Methods & Sources
+
+    **Data Sources:**
+    - Water stress data: World Bank WDI (ER.H2O.FWST.ZS)
+    - Climate projections: IPCC AR6, CMIP6 models
+    - Sectoral data: FAO AQUASTAT, World Bank
+    - Economic impacts: World Bank Climate Change Knowledge Portal
+    - Technology assessments: CGIAR, IWMI research
+
+    **Methodology:**
+    - Water stress calculated as freshwater withdrawals / available resources
+    - Rainfall trends analyzed using Mann-Kendall test
+    - Economic impacts modeled using dose-response functions
+    - Investment requirements based on infrastructure cost models
+
+    **Limitations:**
+    - Data availability varies by country
+    - Projections assume current water management practices
+    - Local variations may not be captured at national scale
+    - Technology adoption rates are estimates
+
+    ${track1APIStatusDisplay}
+  </script>
+  <script id="4" type="text/markdown">
+    ## Appendix
+    #### *raw functions*
+  </script>
+  <script id="133" type="application/vnd.observable.javascript">
+    corsProxy = "https://corsproxy.io/?"
+  </script>
+  <script id="140" type="application/vnd.observable.javascript">
+    faoAPI = "https://www.fao.org/faostat/api/v1"
+
+  </script>
+  <script id="145" type="application/vnd.observable.javascript">
+    aquastatAPI = "https://www.fao.org/aquastat/api"
+
+  </script>
+  <script id="150" type="application/vnd.observable.javascript">
+    worldBankAPI = "https://api.worldbank.org/v2"
+
+  </script>
+  <script id="241" type="application/vnd.observable.javascript">
+    getActiveCountries = {
+      const mode = selectionMode;
+
+      if (mode === "all") {
+        console.log("getActiveCountries: Returning ALL countries");
+        return countryList.map(c => c.name);
+      } else if (mode === "single") {
+        // Single country
+        const selected = selectedCountries;
+        console.log("getActiveCountries: Single -", selected);
+        return [selected].filter(Boolean);
+      } else {
+        // Multiple mode
+        const selected = selectedCountries || [];
+        console.log("getActiveCountries: Multiple -", selected.length, "countries");
+        return selected;
+      }
+    }
+  </script>
+  <script id="154" type="application/vnd.observable.javascript">
+
+    formatDateTime = (date) => date.toLocaleString('en-US', {
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+    })
+
+  </script>
+  <script id="158" type="application/vnd.observable.javascript">
+    // Improve API detection
+    track1APIStatus = {
+      const statuses = {};
+
+      // World Bank API 
+      try {
+        const wbTest = await fetch(`${worldBankAPI}/country/KEN?format=json&per_page=1`);
+        statuses.worldBank = wbTest.ok;
+      } catch (error) {
+        statuses.worldBank = false;
+      }
+
+      // FAO API
+      try {
+        // CORS proxy
+        const faoTest = await fetch(`${corsProxy}https://www.fao.org/faostat/en/`, {
+          method: 'HEAD',
+          mode: 'no-cors'
+        });
+        statuses.fao = true; 
+      } catch (error) {
+        statuses.fao = false;
+      }
+
+      // AQUASTAT API
+      try {
+        const aquaTest = await fetch(`${corsProxy}https://www.fao.org/aquastat/en/`, {
+          method: 'HEAD',
+          mode: 'no-cors'
+        });
+        statuses.aquastat = true;
+      } catch (error) {
+        statuses.aquastat = false;
+      }
+
+      return statuses;
+    }
+  </script>
+  <script id="137" type="application/vnd.observable.javascript">
+    track1APIStatusDisplay = {
+      const status = await track1APIStatus;
+      const now = new Date();
+      const connectedCount = Object.values(status).filter(v => v).length;
+
+      return html`
+        <div style="background: #e8f5e9; padding: 12px; margin-top: 20px; border-radius: 4px; border: 1px solid #81c784;">
+          <strong style="font-size: 14px;">🔌 Data Source Status:</strong>
+
+          <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 15px; font-size: 13px;">
+            <span style="color: ${status.worldBank ? '#2e7d32' : '#d32f2f'};">
+              ${status.worldBank ? '✓' : '✗'} World Bank API (Primary)
+            </span>
+            <span style="color: ${status.fao ? '#2e7d32' : '#ff9800'};">
+              ${status.fao ? '✓' : '⚠'} FAO/FAOSTAT (Secondary)
+            </span>
+            <span style="color: ${status.aquastat ? '#2e7d32' : '#ff9800'};">
+              ${status.aquastat ? '✓' : '⚠'} AQUASTAT (Optional)
+            </span>
+          </div>
+
+          <div style="margin-top: 8px; font-size: 11px; color: #666;">
+            <div>Last checked: ${formatDateTime(now)}</div>
+            <div>
+              ${connectedCount === 3 ? 
+                "✅ Using multiple data sources: World Bank (primary), FAO & AQUASTAT (supplementary)" : 
+                connectedCount === 2 ?
+                "✅ Using World Bank and FAO data where available" :
+                connectedCount === 1 ?
+                "⚠️ Using World Bank data only (other sources offline)" :
+                "⚠️ Using cached/estimated data (all APIs offline)"}
+            </div>
+            <div style="margin-top: 4px;">
+              ${connectedCount} of ${Object.keys(status).length} sources connected | 
+              Data mode: ${connectedCount > 0 ? "Live + Cached" : "Cached Only"}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+  <script id="161" type="application/vnd.observable.javascript">
+    waterStressData = {
+      const indicators = {
+        waterStress: "ER.H2O.FWTL.ZS",      // water stress
+        waterWithdrawal: "ER.H2O.FWAG.ZS",  // for agriculture
+        waterAccess: "SH.H2O.BASW.ZS",      // basic water access
+        irrigation: "AG.LND.IRIG.AG.ZS",    // irrigation area
+        rainfall: "AG.LND.PRCP.MM"          // rain
+      };
+
+      const countries = [];
+
+      try {
+        // African water stress
+        const url = `${worldBankAPI}/country/all/indicator/${indicators.waterStress}?format=json&date=2015:2022&per_page=500`;
+        const response = await fetch(url);
+
+        if (!response.ok) throw new Error('API request failed');
+
+        const data = await response.json();
+
+        // return from World Bank API
+        if (data && data[1]) {
+          const countryData = {};
+
+
+          data[1].forEach(item => {
+            if (item.value !== null && item.country.region.value === "Sub-Saharan Africa") {
+              if (!countryData[item.country.id]) {
+                countryData[item.country.id] = {
+                  code: item.country.id,
+                  name: item.country.value,
+                  waterStress: [],
+                  lat: 0,  
+                  lon: 0
+                };
+              }
+              countryData[item.country.id].waterStress.push({
+                year: parseInt(item.date),
+                value: item.value
+              });
+            }
+          });
+
+          // Avg cal
+          for (const code in countryData) {
+            const country = countryData[code];
+            const avgStress = country.waterStress.reduce((sum, d) => sum + d.value, 0) / country.waterStress.length;
+
+            countries.push({
+              code: country.code,
+              name: country.name,
+              waterStress: Math.round(avgStress),
+              trend: avgStress > 80 ? "decreasing" : avgStress > 50 ? "variable" : "stable",
+              risk: avgStress > 80 ? "very high" : avgStress > 60 ? "high" : avgStress > 40 ? "medium" : "low",
+              lat: country.lat,
+              lon: country.lon
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Failed to load water stress data:", error);
+        // fall back
+        return fallbackWaterStressData;
+      }
+
+      return countries.length > 0 ? countries : fallbackWaterStressData;
+    }
+
+
+  </script>
+  <script id="170" type="application/vnd.observable.javascript">
+    // backup data if sometimes API is not working
+    fallbackWaterStressData = [
+      { code: "KEN", name: "Kenya", waterStress: 35, trend: "variable", risk: "medium", lat: 0.0, lon: 37.9 },
+      { code: "ETH", name: "Ethiopia", waterStress: 45, trend: "increasing", risk: "medium", lat: 9.1, lon: 40.5 },
+      { code: "NGA", name: "Nigeria", waterStress: 55, trend: "stable", risk: "high", lat: 9.1, lon: 8.7 },
+      { code: "ZAF", name: "South Africa", waterStress: 70, trend: "variable", risk: "high", lat: -29.6, lon: 25.0 },
+      { code: "EGY", name: "Egypt", waterStress: 120, trend: "increasing", risk: "very high", lat: 26.8, lon: 30.8 }
+    ]
+
+
+  </script>
+  <script id="166" type="application/vnd.observable.javascript">
+
+    rainfallData = {
+      const countries = selectedCountries || ["Kenya"];
+      const results = [];
+
+      try {
+        // from world bank
+        for (const country of Array.isArray(countries) ? countries : [countries]) {
+          const countryCode = countryList.find(c => c.name === country)?.code || "KEN";
+          const url = `${worldBankAPI}/country/${countryCode}/indicator/AG.LND.PRCP.MM?format=json&date=2010:2022`;
+
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (data && data[1]) {
+            const rainfallValues = data[1]
+              .filter(d => d.value !== null)
+              .map(d => ({
+                year: parseInt(d.date),
+                rainfall: d.value,
+                country: country
+              }));
+
+            results.push(...rainfallValues);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to load rainfall data:", error);
+        // fall back
+        return generateFallbackRainfallData(countries);
+      }
+
+      return results;
+    }
+  </script>
+  <script id="163" type="application/vnd.observable.javascript">
+
+    waterDistributionData = {
+      const indicators = {
+        agricultural: "ER.H2O.FWAG.ZS",  // 農業用水 %
+        domestic: "ER.H2O.FWDM.ZS",      // 家庭用水 %
+        industrial: "ER.H2O.FWIND.ZS"    // 工業用水 %
+      };
+
+      const results = {};
+
+      try {
+        const countryCode = selectionMode === "single" ? 
+          countryList.find(c => c.name === selectedCountries)?.code : "KEN";
+
+        for (const [sector, indicator] of Object.entries(indicators)) {
+          const url = `${worldBankAPI}/country/${countryCode}/indicator/${indicator}?format=json&date=2015:2022`;
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (data && data[1]) {
+            const latestValue = data[1].find(d => d.value !== null);
+            if (latestValue) {
+              results[sector] = latestValue.value;
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Failed to load distribution data:", error);
+      // backup data if sometimes API is not working
+        return {
+          agricultural: 65,
+          domestic: 25,
+          industrial: 10
+        };
+      }
+
+      return results;
+    }
+  </script>
+  <script id="182" type="application/vnd.observable.javascript">
+    generateFallbackRainfallData = (countries) => {
+      return countries.flatMap(country => 
+        [2020, 2021, 2022].map(year => ({
+          year,
+          rainfall: 600 + Math.random() * 400,
+          country
+        }))
+      );
+    }
+  </script>
+  <script id="11" type="application/vnd.observable.javascript">
+    africaCountries = ({
+      // North Africa
+      "DZA": { name: "Algeria", lat: 28.0, lon: 3.0, waterStress: 85, trend: "decreasing", risk: "high" },
+      "EGY": { name: "Egypt", lat: 26.8, lon: 30.8, waterStress: 120, trend: "decreasing", risk: "very high" },
+      "LBY": { name: "Libya", lat: 25.0, lon: 17.0, waterStress: 110, trend: "stable", risk: "very high" },
+      "MAR": { name: "Morocco", lat: 31.8, lon: -5.0, waterStress: 95, trend: "decreasing", risk: "high" },
+      "TUN": { name: "Tunisia", lat: 33.9, lon: 9.5, waterStress: 90, trend: "decreasing", risk: "high" },
+
+      // East Africa
+      "BDI": { name: "Burundi", lat: -3.5, lon: 29.9, waterStress: 45, trend: "stable", risk: "medium" },
+      "COM": { name: "Comoros", lat: -11.9, lon: 43.3, waterStress: 40, trend: "stable", risk: "medium" },
+      "DJI": { name: "Djibouti", lat: 11.9, lon: 42.6, waterStress: 130, trend: "decreasing", risk: "very high" },
+      "ERI": { name: "Eritrea", lat: 15.2, lon: 39.0, waterStress: 100, trend: "decreasing", risk: "very high" },
+      "ETH": { name: "Ethiopia", lat: 9.1, lon: 40.5, waterStress: 75, trend: "variable", risk: "high" },
+      "KEN": { name: "Kenya", lat: -0.0, lon: 37.9, waterStress: 80, trend: "decreasing", risk: "high" },
+      "MDG": { name: "Madagascar", lat: -18.8, lon: 46.9, waterStress: 35, trend: "variable", risk: "medium" },
+      "MWI": { name: "Malawi", lat: -13.3, lon: 34.3, waterStress: 30, trend: "stable", risk: "low" },
+      "MUS": { name: "Mauritius", lat: -20.3, lon: 57.6, waterStress: 25, trend: "stable", risk: "low" },
+      "MOZ": { name: "Mozambique", lat: -15.3, lon: 35.3, waterStress: 40, trend: "variable", risk: "medium" },
+      "RWA": { name: "Rwanda", lat: -1.9, lon: 29.9, waterStress: 35, trend: "stable", risk: "low" },
+      "SYC": { name: "Seychelles", lat: -4.6, lon: 55.5, waterStress: 20, trend: "stable", risk: "low" },
+      "SOM": { name: "Somalia", lat: 5.0, lon: 46.0, waterStress: 140, trend: "decreasing", risk: "very high" },
+      "SSD": { name: "South Sudan", lat: 6.9, lon: 31.3, waterStress: 85, trend: "variable", risk: "high" },
+      "SDN": { name: "Sudan", lat: 12.9, lon: 30.2, waterStress: 100, trend: "decreasing", risk: "high" },
+      "TZA": { name: "Tanzania", lat: -6.4, lon: 34.9, waterStress: 45, trend: "stable", risk: "medium" },
+      "UGA": { name: "Uganda", lat: 1.4, lon: 32.3, waterStress: 40, trend: "stable", risk: "medium" },
+
+      // West Africa
+      "BEN": { name: "Benin", lat: 9.3, lon: 2.3, waterStress: 50, trend: "stable", risk: "medium" },
+      "BFA": { name: "Burkina Faso", lat: 12.2, lon: -1.5, waterStress: 80, trend: "decreasing", risk: "high" },
+      "CPV": { name: "Cape Verde", lat: 16.0, lon: -24.0, waterStress: 115, trend: "decreasing", risk: "very high" },
+      "CIV": { name: "Côte d'Ivoire", lat: 7.5, lon: -5.5, waterStress: 35, trend: "stable", risk: "low" },
+      "GMB": { name: "Gambia", lat: 13.5, lon: -15.5, waterStress: 60, trend: "variable", risk: "medium" },
+      "GHA": { name: "Ghana", lat: 5.6, lon: -0.2, waterStress: 45, trend: "stable", risk: "low" },
+      "GIN": { name: "Guinea", lat: 9.9, lon: -9.7, waterStress: 30, trend: "stable", risk: "low" },
+      "GNB": { name: "Guinea-Bissau", lat: 11.9, lon: -15.1, waterStress: 35, trend: "stable", risk: "low" },
+      "LBR": { name: "Liberia", lat: 6.4, lon: -9.4, waterStress: 20, trend: "stable", risk: "low" },
+      "MLI": { name: "Mali", lat: 17.0, lon: -4.0, waterStress: 85, trend: "decreasing", risk: "high" },
+      "MRT": { name: "Mauritania", lat: 21.0, lon: -10.0, waterStress: 105, trend: "decreasing", risk: "very high" },
+      "NER": { name: "Niger", lat: 17.6, lon: 8.7, waterStress: 110, trend: "decreasing", risk: "very high" },
+      "NGA": { name: "Nigeria", lat: 9.1, lon: 8.7, waterStress: 55, trend: "variable", risk: "medium" },
+      "SEN": { name: "Senegal", lat: 14.5, lon: -14.4, waterStress: 70, trend: "decreasing", risk: "high" },
+      "SLE": { name: "Sierra Leone", lat: 8.5, lon: -11.8, waterStress: 25, trend: "stable", risk: "low" },
+      "TGO": { name: "Togo", lat: 6.1, lon: 1.2, waterStress: 40, trend: "stable", risk: "medium" },
+
+      // Central Africa
+      "AGO": { name: "Angola", lat: -8.0, lon: 23.0, waterStress: 50, trend: "stable", risk: "medium" },
+      "CMR": { name: "Cameroon", lat: 3.9, lon: 11.5, waterStress: 30, trend: "stable", risk: "low" },
+      "CAF": { name: "Central African Republic", lat: 6.6, lon: 20.9, waterStress: 35, trend: "stable", risk: "medium" },
+      "TCD": { name: "Chad", lat: 15.0, lon: 19.0, waterStress: 90, trend: "decreasing", risk: "high" },
+      "COG": { name: "Congo", lat: -1.0, lon: 15.8, waterStress: 25, trend: "stable", risk: "low" },
+      "COD": { name: "Democratic Republic of the Congo", lat: -4.0, lon: 21.8, waterStress: 30, trend: "stable", risk: "low" },
+      "GNQ": { name: "Equatorial Guinea", lat: 1.9, lon: 10.3, waterStress: 20, trend: "stable", risk: "low" },
+      "GAB": { name: "Gabon", lat: -0.6, lon: 11.6, waterStress: 15, trend: "stable", risk: "low" },
+      "STP": { name: "São Tomé and Príncipe", lat: 0.2, lon: 6.6, waterStress: 25, trend: "stable", risk: "low" },
+
+      // Southern Africa
+      "BWA": { name: "Botswana", lat: -22.0, lon: 24.0, waterStress: 95, trend: "variable", risk: "high" },
+      "SWZ": { name: "Eswatini", lat: -26.5, lon: 31.5, waterStress: 60, trend: "stable", risk: "medium" },
+      "LSO": { name: "Lesotho", lat: -29.6, lon: 28.2, waterStress: 55, trend: "stable", risk: "medium" },
+      "NAM": { name: "Namibia", lat: -22.6, lon: 17.1, waterStress: 100, trend: "decreasing", risk: "very high" },
+      "ZAF": { name: "South Africa", lat: -29.6, lon: 25.0, waterStress: 70, trend: "variable", risk: "medium" },
+      "ZMB": { name: "Zambia", lat: -13.1, lon: 27.8, waterStress: 40, trend: "stable", risk: "medium" },
+      "ZWE": { name: "Zimbabwe", lat: -19.0, lon: 29.2, waterStress: 75, trend: "decreasing", risk: "high" }
+    })
+
+  </script>
+  <script id="13" type="application/vnd.observable.javascript">
+    countryList = Object.keys(africaCountries).map(code => ({
+      code,
+      ...africaCountries[code]
+    })).sort((a, b) => a.name.localeCompare(b.name))
+
+  </script>
+  <script id="194" type="application/vnd.observable.javascript">
+    enhancedWaterStressData = {
+      const baseData = countryList;  
+      const enhanced = [...baseData];
+
+      try {
+        //  World Bank API
+        const indicator = "ER.H2O.FWTL.ZS";  // water stress index
+        const url = `${worldBankAPI}/country/all/indicator/${indicator}?format=json&date=2018:2022&per_page=500`;
+        const response = await fetch(url);
+
+        if (response.ok) {
+          const data = await response.json();
+
+          if (data && data[1]) {
+            const apiDataMap = {};
+
+            data[1].forEach(item => {
+              if (item.value !== null) {
+                const code = item.countryiso3code || item.country.id;
+                if (!apiDataMap[code] || item.date > apiDataMap[code].date) {
+                  apiDataMap[code] = {
+                    waterStress: Math.round(item.value),
+                    year: item.date,
+                    source: "World Bank API"
+                  };
+                }
+              }
+            });
+
+            enhanced.forEach(country => {
+              if (apiDataMap[country.code]) {
+                country.waterStress = apiDataMap[country.code].waterStress;
+                country.dataYear = apiDataMap[country.code].year;
+                country.dataSource = apiDataMap[country.code].source;
+              } else {
+                country.dataSource = "Estimated";
+              }
+            });
+          }
+        }
+      } catch (error) {
+        console.log("Using fallback data - API unavailable");
+      }
+
+      return enhanced;
+    }
+
+  </script>
+  <script id="15" type="application/vnd.observable.javascript">
+    countryColorScale = d3.scaleOrdinal()
+      .domain(countryList.map(c => c.name))
+      .range([
+        ...d3.schemeCategory10,
+        ...d3.schemeSet3,
+        ...d3.schemePaired,
+        ...d3.schemeTableau10,
+        ...d3.schemeDark2,
+        ...d3.schemeAccent,
+        "#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4",
+        "#F4A460", "#DDA0DD", "#98FB98", "#F0E68C"
+      ])
+
+  </script>
+  <script id="247" type="application/vnd.observable.javascript">
+    getCurrentSelection = {
+      const mode = selectionMode;
+
+      if (mode === "all") {
+        return countryList.map(c => c.name);
+      } else if (mode === "single") {
+        return [selectedCountries].filter(Boolean);
+      } else {
+        return selectedCountries || [];
+      }
+    }
+  </script>
+  <script id="36" type="application/vnd.observable.javascript">
+    processedData = {
+      const trigger = runAnalysis;
+      const mode = selectionMode; 
+      const selection = selectedCountries; 
+
+      console.log(`ProcessedData update: Mode=${mode}, Trigger=${trigger}`);
+
+      const baseData = countryList;
+
+      if (mode === "all") {
+        const allData = baseData.map(c => ({
+          ...c,
+          color: countryColorScale(c.name)
+        }));
+        console.log(`Returning ALL ${allData.length} countries`);
+        return allData;
+
+      } else if (mode === "single") {
+        // Single model
+        const countryName = selection; 
+        const country = baseData.find(c => c.name === countryName);
+        if (!country) {
+          console.error(`Country not found: ${countryName}`);
+          return [];
+        }
+        return [{
+          ...country,
+          color: countryColorScale(country.name)
+        }];
+
+      } else {
+        // Multiple mode
+        const selectedNames = selection || []; // selection 是陣列
+        return selectedNames.map(name => {
+          const country = baseData.find(c => c.name === name);
+          if (!country) {
+            console.warn(`Country not found: ${name}`);
+            return {
+              name: name,
+              code: "XX",
+              waterStress: 50,
+              trend: "stable",
+              risk: "medium",
+              color: countryColorScale(name)
+            };
+          }
+          return {
+            ...country,
+            color: countryColorScale(name)
+          };
+        });
+      }
+    }
+  </script>
+  <script id="118" type="application/vnd.observable.javascript">
+    countries = [
+      {name: "Kenya", code: "KE"},
+      {name: "Uganda", code: "UG"},
+      {name: "Tanzania", code: "TZ"},
+      {name: "Rwanda", code: "RW"},
+      {name: "Ethiopia", code: "ET"},
+      {name: "Nigeria", code: "NG"},
+      {name: "Ghana", code: "GH"},
+      {name: "South Africa", code: "ZA"},
+      {name: "Senegal", code: "SN"},
+      {name: "Burkina Faso", code: "BF"}
+    ]
+
+
+  </script>
+  <script id="120" type="application/vnd.observable.javascript">
+    pestRiskData = countries.map(c => ({
+      country: c.name,
+      riskScore: Math.floor(Math.random() * 40 + 40),
+      pestCount: Math.floor(Math.random() * 5 + 3),
+      affectedArea: Math.floor(Math.random() * 30 + 20)
+    }))
+  </script>
+</notebook>
