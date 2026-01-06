@@ -1,8 +1,5 @@
 # Adaptation Atlas Data Storytelling Challenge
 
-## 🏆 Award
-### Best Female Submission (across all tracks)
-
 ## 📋 About
 Data storytelling notebooks exploring climate change impacts on water security, agriculture, health, and ecosystems across Africa.
 
@@ -16,6 +13,9 @@ Data storytelling notebooks exploring climate change impacts on water security, 
 | Track 4 | Infectious Diseases | 3rd | [View](https://observablehq.com/d/bee2605183c9b2fc) | [Link](https://zindi.africa/competitions/adaptation-atlas-data-storytelling-challenge-track-4-infectious-diseases) |
 | Track 5 | Rainfall | 13th | [View](https://observablehq.com/d/65037b044fd2dcfc) | [Link](https://zindi.africa/competitions/adaptation-atlas-data-storytelling-challenge-track-5-rainfall) |
 | Track 6 | Forest Cover | 4th | [View](https://observablehq.com/d/ffc9bc42db49958a) | [Link](https://zindi.africa/competitions/adaptation-atlas-data-storytelling-challenge-track-6-forest-cover) |
+
+## 🏆 Award
+🙆‍♀️ Best Female Submission (across all tracks) 🙆‍♀️ 
 
 ## 🛠 Tools Used
 Observable, JavaScript, HTML, Data Visualization
